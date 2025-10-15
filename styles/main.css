@@ -166,7 +166,7 @@ section {
 .theme-toggle {
     position: fixed;
     top: 0.80rem;
-    right: 0.15rem;
+    right: 0.100rem;
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
@@ -648,11 +648,7 @@ section {
         padding: 3rem 0;
     }
     
-    .theme-toggle,
-    .audio-control {
-        width: 45px;
-        height: 45px;
-    }
+
 }
 
 @media (max-width: 480px) {
