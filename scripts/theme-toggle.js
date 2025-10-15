@@ -60,27 +60,47 @@
             this.applyTheme(this.currentTheme, false);
         }
 
-        applyTheme(theme, animate = true) {
-            if (this.isTransitioning || theme === this.currentTheme) return;
-            
-            const previousTheme = this.currentTheme;
-            this.currentTheme = theme;
-            
-            console.log(`🎨 Applying theme: ${theme} ${animate ? '(with animation)' : '(without animation)'}`);
-            
-            if (animate) {
-                this.animateThemeTransition(previousTheme, theme);
-            } else {
-                this.setThemeAttributes(theme);
-            }
-            
-            // Save preference
-            this.saveThemePreference(theme);
-            
-            // Update UI
-            this.updateToggleButton();
-            this.dispatchThemeChangeEvent();
+// Di method applyTheme(), tambahkan force update
+    applyTheme(theme, animate = true) {
+        if (this.isTransitioning || theme === this.currentTheme) return;
+        
+        const previousTheme = this.currentTheme;
+        this.currentTheme = theme;
+        
+        console.log(`🎨 Applying theme to ALL elements: ${theme}`);
+        
+        // Force apply to entire document
+        document.documentElement.setAttribute('data-theme', theme);
+        
+        if (animate) {
+            this.animateThemeTransition(previousTheme, theme);
+        } else {
+            this.setThemeAttributes(theme);
         }
+        
+        // Extra insurance: manually trigger style recalculation
+        this.forceStyleRecalculation();
+        
+        this.saveThemePreference(theme);
+        this.updateToggleButton();
+        this.dispatchThemeChangeEvent();
+    }
+
+    // Tambahkan method untuk force style recalculation
+    forceStyleRecalculation() {
+        // Trigger browser to recalculate styles
+        document.body.style.animation = 'none';
+        document.body.offsetHeight; /* trigger reflow */
+        document.body.style.animation = null;
+        
+        // Force all sections to update
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            section.style.animation = 'none';
+            section.offsetHeight;
+            section.style.animation = null;
+        });
+    }
 
         setThemeAttributes(theme) {
             const body = document.body;

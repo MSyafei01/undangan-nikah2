@@ -13,24 +13,35 @@
     }
 
     /* ===== SMOOTH THEME TRANSITIONS ===== */
-    body,
-    .hero-content,
-    .event-card,
-    .rsvp-form,
-    .theme-toggle,
-    .audio-control,
-    .countdown-item,
-    .gallery-slider,
-    .vows-image,
-    .nav-btn,
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        transition: 
-        background-color var(--theme-transition-duration) var(--theme-transition-timing),
-        color var(--theme-transition-duration) var(--theme-transition-timing),
-        border-color var(--theme-transition-duration) var(--theme-transition-timing),
-        box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
+body,
+.hero,
+.blessing, 
+.love-story,
+.wedding-events,
+.sacred-vows,
+.gallery,
+.rsvp,
+.gratitude,
+.footer,
+.container,
+.hero-content,
+.event-card,
+.rsvp-form,
+.countdown-item,
+.gallery-slider,
+.vows-image,
+.events-image,
+.nav-btn,
+.form-group input,
+.form-group select,
+.form-group textarea,
+.theme-toggle,
+.audio-control 
+        {
+        background: inherit;
+        color: inherit;
+        border-color: inherit;
+        box-shadow: inherit;
     }
 
     /* ===== LIGHT THEME ENHANCEMENTS ===== */
@@ -201,32 +212,43 @@
         box-shadow: 0 0 15px rgba(245, 158, 11, 0.7);
     }
 
-    /* Section Background Themes */
+    /* Specific section backgrounds */
     [data-theme="light"] .blessing,
     [data-theme="light"] .wedding-events,
+    [data-theme="light"] .sacred-vows,
     [data-theme="light"] .gratitude {
-        background: var(--bg-secondary);
+        background: var(--bg-secondary) !important;
     }
 
     [data-theme="dark"] .blessing,
     [data-theme="dark"] .wedding-events,
+    [data-theme="dark"] .sacred-vows,
     [data-theme="dark"] .gratitude {
-        background: var(--bg-secondary);
+        background: var(--bg-secondary) !important;
     }
 
     [data-theme="light"] .love-story,
     [data-theme="light"] .gallery,
     [data-theme="light"] .rsvp,
     [data-theme="light"] .footer {
-        background: var(--bg-primary);
+        background: var(--bg-primary) !important;
     }
 
     [data-theme="dark"] .love-story,
     [data-theme="dark"] .gallery,
     [data-theme="dark"] .rsvp,
     [data-theme="dark"] .footer {
-        background: var(--bg-primary);
+        background: var(--bg-primary) !important;
     }
+
+    /* Hero section special handling */
+[data-theme="light"] .hero {
+    background: linear-gradient(135deg, var(--accent-blue), var(--bg-secondary)) !important;
+}
+
+[data-theme="dark"] .hero {
+    background: linear-gradient(135deg, #1e1b4b, #312e81) !important;
+}
 
     /* Text Color Themes */
     [data-theme="light"] .section-title {
