@@ -1,7 +1,4 @@
 // ===== WEDDING INVITATION MAIN SCRIPT =====
-// Author: Wedding Invitation System
-// Version: 1.0.0
-
 class WeddingInvitation {
     constructor() {
         this.init();
@@ -11,8 +8,7 @@ class WeddingInvitation {
     init() {
         console.log('🎉 Wedding Invitation Initialized!');
         
-        // Initialize all components
-        this.initTheme();
+        // Initialize all components (HAPUS initTheme())
         this.initCountdown();
         this.initScrollAnimations();
         this.initNavigation();
@@ -20,60 +16,17 @@ class WeddingInvitation {
         this.initPerformanceOptimizations();
         this.initErrorHandling();
         
-        // Add event listeners
+        // Add event listeners (HAPUS theme listener)
         this.addEventListeners();
         
         // Start animations
         this.startEntranceAnimations();
     }
 
-    // ===== THEME MANAGEMENT =====
-    initTheme() {
-        // Load saved theme or detect system preference
-        /*const savedTheme = localStorage.getItem('wedding-theme');
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        if (savedTheme) {
-            this.applyTheme(savedTheme);
-        } else if (systemPrefersDark) {
-            this.applyTheme('dark');
-        }*/
-        
-        // Listen for system theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (!localStorage.getItem('wedding-theme')) {
-                this.applyTheme(e.matches ? 'dark' : 'light');
-            }
-        });
-    }
-
-    applyTheme(theme) {
-        /*const body = document.body;
-        const toggleBtn = document.querySelector('.theme-toggle');
-        
-        // Add transition class for smooth theme switch
-        body.classList.add('theme-switching');
-        */
-        if (theme === 'dark') {
-            body.setAttribute('data-theme', 'dark');
-            toggleBtn.innerHTML = '☀️';
-            localStorage.setItem('wedding-theme', 'dark');
-        } else {
-            body.removeAttribute('data-theme');
-            toggleBtn.innerHTML = '🌙';
-            localStorage.setItem('wedding-theme', 'light');
-        }
-        
-        // Remove transition class after animation
-        setTimeout(() => {
-            body.classList.remove('theme-switching');
-        }, 600);
-    }
-
-    toggleTheme() {
-        const currentTheme = document.body.getAttribute('data-theme');
-        this.applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
-    }
+    // ===== HAPUS SEMUA METHOD THEME INI =====
+    // initTheme() { ... } - HAPUS
+    // applyTheme() { ... } - HAPUS  
+    // toggleTheme() { ... } - HAPUS
 
     // ===== COUNTDOWN TIMER =====
     initCountdown() {
@@ -87,7 +40,6 @@ class WeddingInvitation {
         const distance = weddingDate - now;
 
         if (distance < 0) {
-            // Wedding day has arrived!
             this.handleWeddingDay();
             return;
         }
@@ -148,7 +100,6 @@ class WeddingInvitation {
 
     // ===== SCROLL ANIMATIONS =====
     initScrollAnimations() {
-        // Create Intersection Observer for scroll animations
         this.observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
@@ -163,7 +114,6 @@ class WeddingInvitation {
             }
         );
 
-        // Observe all animatable elements
         this.observeAnimatableElements();
     }
 
@@ -199,10 +149,7 @@ class WeddingInvitation {
 
     // ===== NAVIGATION =====
     initNavigation() {
-        // Smooth scroll for navigation
         this.setupSmoothScroll();
-        
-        // Add scroll progress indicator
         this.setupScrollProgress();
     }
 
@@ -226,20 +173,17 @@ class WeddingInvitation {
     }
 
     setupScrollProgress() {
-        // Optional: Add scroll progress bar if needed
         window.addEventListener('scroll', () => {
             this.throttle(this.updateScrollProgress, 100)();
         });
     }
 
     updateScrollProgress() {
-        // Implementation for scroll progress bar
         const winHeight = window.innerHeight;
         const docHeight = document.documentElement.scrollHeight;
         const scrollTop = window.pageYOffset;
         const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
         
-        // Update progress bar if exists
         const progressBar = document.querySelector('.scroll-progress');
         if (progressBar) {
             progressBar.style.width = scrollPercent + '%';
@@ -335,7 +279,6 @@ class WeddingInvitation {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
         
-        // Validate all fields
         let isFormValid = true;
         const fields = form.querySelectorAll('input, select, textarea');
         
@@ -350,7 +293,6 @@ class WeddingInvitation {
             return;
         }
         
-        // Show loading state
         const submitBtn = form.querySelector('.submit-btn');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Mengirim...';
@@ -370,11 +312,9 @@ class WeddingInvitation {
     }
 
     async submitRSVPData(data) {
-        // Simulate API call - replace with actual endpoint
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                // For demo purposes, we'll simulate both success and random failure
-                if (Math.random() > 0.2) { // 80% success rate for demo
+                if (Math.random() > 0.2) {
                     console.log('RSVP Data Submitted:', data);
                     resolve(data);
                 } else {
@@ -386,19 +326,13 @@ class WeddingInvitation {
 
     // ===== PERFORMANCE OPTIMIZATIONS =====
     initPerformanceOptimizations() {
-        // Throttle scroll events
         this.throttleScrollEvents();
-        
-        // Lazy load images
         this.setupLazyLoading();
-        
-        // Preload critical resources
         this.preloadResources();
     }
 
     throttleScrollEvents() {
-        // Scroll events are already handled by Intersection Observer
-        // This is just for additional scroll-related functionality
+        // Scroll events handled by Intersection Observer
     }
 
     setupLazyLoading() {
@@ -422,17 +356,6 @@ class WeddingInvitation {
 
     preloadResources() {
         // Preload critical resources
-        const preloadLinks = [
-            // Add any critical resources to preload
-        ];
-
-        preloadLinks.forEach(href => {
-            const link = document.createElement('link');
-            link.rel = 'preload';
-            link.href = href;
-            link.as = 'image';
-            document.head.appendChild(link);
-        });
     }
 
     // ===== ERROR HANDLING =====
@@ -448,7 +371,6 @@ class WeddingInvitation {
 
     // ===== ENTRANCE ANIMATIONS =====
     startEntranceAnimations() {
-        // Add initial animations when page loads
         document.querySelectorAll('.section-title').forEach((title, index) => {
             title.style.animationDelay = `${index * 0.2}s`;
         });
@@ -456,11 +378,8 @@ class WeddingInvitation {
 
     // ===== EVENT LISTENERS =====
     addEventListeners() {
-        // Theme toggle
-        const themeToggle = document.querySelector('.theme-toggle');
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => this.toggleTheme());
-        }
+        // HAPUS theme toggle listener dari sini
+        // Biarkan theme-toggle.js yang handle
         
         // Open invitation button
         const openBtn = document.querySelector('.open-btn');
@@ -476,23 +395,19 @@ class WeddingInvitation {
     }
 
     openInvitation() {
-        // Scroll to blessing section
         const blessingSection = document.getElementById('blessing');
         if (blessingSection) {
             blessingSection.scrollIntoView({ behavior: 'smooth' });
         }
         
-        // Trigger audio play (handled in audio-player.js)
         if (window.audioPlayer) {
             window.audioPlayer.play();
         }
         
-        // Add celebration effects
         this.createCelebrationEffects();
     }
 
     createCelebrationEffects() {
-        // Add some celebration particles
         for (let i = 0; i < 15; i++) {
             this.createParticle();
         }
@@ -516,7 +431,6 @@ class WeddingInvitation {
         
         document.body.appendChild(particle);
         
-        // Random direction
         const angle = Math.random() * Math.PI * 2;
         const distance = 100 + Math.random() * 100;
         const x = Math.cos(angle) * distance;
@@ -525,7 +439,6 @@ class WeddingInvitation {
         particle.style.setProperty('--end-x', `${x}px`);
         particle.style.setProperty('--end-y', `${y}px`);
         
-        // Remove particle after animation
         setTimeout(() => {
             if (particle.parentNode) {
                 particle.parentNode.removeChild(particle);
@@ -539,12 +452,11 @@ class WeddingInvitation {
     }
 
     onWindowResize() {
-        // Handle responsive adjustments
         this.handleResponsiveAdjustments();
     }
 
     handleResponsiveAdjustments() {
-        // Add any responsive adjustments here
+        // Responsive adjustments
     }
 
     // ===== UTILITY FUNCTIONS =====
@@ -562,7 +474,6 @@ class WeddingInvitation {
     }
 
     showNotification(message, type = 'info') {
-        // Create notification element
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
         notification.textContent = message;
@@ -579,7 +490,6 @@ class WeddingInvitation {
             max-width: 300px;
         `;
         
-        // Set background color based on type
         const colors = {
             success: '#10b981',
             error: '#ef4444',
@@ -590,12 +500,10 @@ class WeddingInvitation {
         
         document.body.appendChild(notification);
         
-        // Animate in
         setTimeout(() => {
             notification.style.transform = 'translateX(0)';
         }, 100);
         
-        // Auto remove after 5 seconds
         setTimeout(() => {
             notification.style.transform = 'translateX(100%)';
             setTimeout(() => {
@@ -613,12 +521,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===== GLOBAL FUNCTIONS FOR HTML ONCLICK =====
-function toggleTheme() {
-    if (window.weddingApp) {
-        window.weddingApp.toggleTheme();
-    }
-}
-
+// HAPUS toggleTheme() dari sini
 function openInvitation() {
     if (window.weddingApp) {
         window.weddingApp.openInvitation();
