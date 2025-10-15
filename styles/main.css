@@ -162,28 +162,30 @@ section {
     box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
 }
 
-/* Theme Toggle */
+/* Theme Toggle - Better Position */
 .theme-toggle {
     position: fixed;
-    top: 2rem;
-    right: 2rem;
+    top: 1.5rem;
+    right: 1.5rem;
     background: var(--glass-bg);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 1000;
     transition: all 0.3s ease;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    box-shadow: var(--shadow);
 }
 
 .theme-toggle:hover {
-    transform: scale(1.1);
+    transform: scale(1.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* Blessing Section */
@@ -571,28 +573,30 @@ section {
     font-size: 0.9rem;
 }
 
-/* Audio Control */
+/* Audio Control - Balanced Position */
 .audio-control {
     position: fixed;
-    bottom: 2rem;
-    left: 2rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
     background: var(--glass-bg);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 1000;
     transition: all 0.3s ease;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    box-shadow: var(--shadow);
 }
 
 .audio-control:hover {
-    transform: scale(1.1);
+    transform: scale(1.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* Responsive Design */

@@ -27,11 +27,10 @@
     .form-group select,
     .form-group textarea {
         transition: 
-            var(--background-transition),
-            var(--color-transition),
-            var(--border-transition),
-            var(--shadow-transition),
-            var(--opacity-transition);
+        background-color var(--theme-transition-duration) var(--theme-transition-timing),
+        color var(--theme-transition-duration) var(--theme-transition-timing),
+        border-color var(--theme-transition-duration) var(--theme-transition-timing),
+        box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
     }
 
     /* ===== LIGHT THEME ENHANCEMENTS ===== */
