@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 :root {
@@ -36,15 +37,24 @@ body {
     font-family: 'Inter', sans-serif;
     background: var(--bg-primary);
     color: var(--text-primary);
-    transition: all 0.3s ease;
     overflow-x: hidden;
     line-height: 1.6;
+}
+
+/* ===== TEXT COLOR FIX ===== */
+/* Pastikan semua text elements pakai variable */
+p, span, div, li, td, .story-paragraph, .blessing-text, .gratitude-text, 
+.footer-text, .copyright, .quran-verse, .event-detail, .vows-detail, 
+.events-detail, .countdown-item, .form-group input, .form-group select, 
+.form-group textarea {
+    color: var(--text-primary);
 }
 
 /* Typography */
 h1, h2, h3 {
     font-family: 'Playfair Display', serif;
     font-weight: 400;
+    color: var(--text-primary);
 }
 
 .section-title {
@@ -137,6 +147,7 @@ section {
     border-radius: 10px;
     min-width: 80px;
     backdrop-filter: blur(10px);
+    color: var(--text-primary);
 }
 
 .countdown-number {
@@ -162,30 +173,29 @@ section {
     box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
 }
 
-/* Theme Toggle - Better Position */
+/* ===== THEME TOGGLE FIX ===== */
 .theme-toggle {
     position: fixed;
-    top: 0.80rem;
-    right: 0.100rem;
+    top: 1.5rem;
+    right: -1.5rem;
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: 50%;
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 1000;
     transition: all 0.3s ease;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     box-shadow: var(--shadow);
 }
 
 .theme-toggle:hover {
-    transform: scale(1.15);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: scale(1.1);
 }
 
 /* Blessing Section */
@@ -204,6 +214,7 @@ section {
     line-height: 1.8;
     margin-bottom: 2rem;
     text-align: justify;
+    color: var(--text-primary);
 }
 
 .arabic-text {
@@ -224,14 +235,16 @@ section {
     margin: 0 auto;
     font-size: 1.1rem;
     line-height: 1.8;
+    color: var(--text-primary);
 }
 
 .story-paragraph {
     margin-bottom: 2rem;
     text-align: justify;
+    color: var(--text-primary);
 }
 
-/* Wedding Events Section - New Structure */
+/* Wedding Events Section */
 .wedding-events {
     background: var(--bg-secondary);
 }
@@ -278,6 +291,7 @@ section {
     gap: 1rem;
     margin-bottom: 1rem;
     font-size: 1.1rem;
+    color: var(--text-primary);
 }
 
 .events-detail .icon {
@@ -300,8 +314,6 @@ section {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
 }
-
-
 
 /* Gallery Section */
 .gallery {
@@ -436,6 +448,7 @@ section {
     gap: 1rem;
     margin-bottom: 1rem;
     font-size: 1.1rem;
+    color: var(--text-primary);
 }
 
 .vows-detail .icon {
@@ -493,6 +506,10 @@ section {
     transition: all 0.3s ease;
 }
 
+.form-group input::placeholder {
+    color: var(--text-secondary);
+}
+
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
@@ -534,6 +551,7 @@ section {
     font-size: 1.2rem;
     line-height: 1.8;
     margin-bottom: 3rem;
+    color: var(--text-primary);
 }
 
 .signature {
@@ -566,6 +584,7 @@ section {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    color: var(--text-primary);
 }
 
 .copyright {
@@ -573,7 +592,7 @@ section {
     font-size: 0.9rem;
 }
 
-/* Audio Control - Balanced Position */
+/* Audio Control */
 .audio-control {
     position: fixed;
     bottom: 1.5rem;
@@ -582,35 +601,21 @@ section {
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: 50%;
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 1000;
     transition: all 0.3s ease;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     box-shadow: var(--shadow);
 }
 
 .audio-control:hover {
-    transform: scale(1.15);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: scale(1.1);
 }
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .events-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .events-image img {
-        height: 300px;
-    }
-}
-
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -627,13 +632,15 @@ section {
         margin: 1rem;
     }
     
-    .vows-content {
+    .vows-content,
+    .events-content {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
     
-    .events-grid {
-        grid-template-columns: 1fr;
+    .events-image img,
+    .vows-image img {
+        height: 300px;
     }
     
     .gallery-slider {
@@ -648,7 +655,11 @@ section {
         padding: 3rem 0;
     }
     
-
+    .theme-toggle,
+    .audio-control {
+        width: 45px;
+        height: 45px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -671,5 +682,15 @@ section {
     
     .rsvp-form {
         padding: 2rem;
+    }
+    
+    .theme-toggle {
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    .audio-control {
+        bottom: 1rem;
+        left: 1rem;
     }
 }
