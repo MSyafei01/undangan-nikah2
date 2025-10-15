@@ -71,16 +71,16 @@ body,
     /* ===== DARK THEME ENHANCEMENTS ===== */
     [data-theme="dark"] {
         /* Enhanced dark theme colors */
-        --bg-primary: #0f172a;
-        --bg-secondary: #1e293b;
-        --text-primary: #f1f5f9;
-        --text-secondary: #94a3b8;
-        --accent-gold: #f59e0b;
-        --accent-blue: #60a5fa;
-        --glass-bg: rgba(30, 41, 59, 0.3);
-        --glass-border: rgba(255, 255, 255, 0.1);
-        --shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.4);
+
+    --bg-primary: #0a1930;
+    --bg-secondary: #1a2b4a;
+    --text-primary: #ffffff;      /* WARNA PUTIH untuk dark mode */
+    --text-secondary: #b8c7e0;    /* Text secondary lebih terang */
+    --accent-gold: #FFD700;
+    --accent-blue: #4a86e8;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         
         /* Gradient variations */
         --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
@@ -241,14 +241,7 @@ body,
         background: var(--bg-primary) !important;
     }
 
-    /* Hero section special handling */
-[data-theme="light"] .hero {
-    background: linear-gradient(135deg, var(--accent-blue), var(--bg-secondary)) !important;
-}
-
-[data-theme="dark"] .hero {
-    background: linear-gradient(135deg, #1e1b4b, #312e81) !important;
-}
+    
 
     /* Text Color Themes */
     [data-theme="light"] .section-title {
@@ -381,8 +374,8 @@ body,
     @media (prefers-color-scheme: dark) {
         :root:not([data-theme]) {
             /* Auto dark theme if user prefers dark and no theme set */
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
+            --bg-primary: #e4e8f1;
+            --bg-secondary: #e2e6ed;
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
             --accent-gold: #f59e0b;
