@@ -165,8 +165,8 @@ section {
 /* Theme Toggle - Better Position */
 .theme-toggle {
     position: fixed;
-    top: 1.5rem;
-    right: 1.5rem;
+    top: 0.80rem;
+    right: 0.15rem;
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
