@@ -7,38 +7,43 @@
 }
 
 :root {
-    /* Light Theme */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8f9fa;
-    --text-primary: #2c3e50;
-    --text-secondary: #6c757d;
-    --accent-gold: #D4AF37;
-    --accent-blue: #2c5aa0;
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.769);
-    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    --border-radius: 15px;
+    /* Light Theme - DEFAULT */
+    --bg-primary: #ffffff !important;
+    --bg-secondary: #f8f9fa !important;
+    --text-primary: #2c3e50 !important; /* PASTIKAN HITAM di light mode */
+    --text-secondary: #6c757d !important;
+    --accent-gold: #D4AF37 !important;
+    --accent-blue: #2c5aa0 !important;
+    --glass-bg: rgba(255, 255, 255, 0.1) !important;
+    --glass-border: rgba(255, 255, 255, 0.769) !important;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    --border-radius: 15px !important;
 }
 
 [data-theme="dark"] {
-    /* Dark Theme */
-    --bg-primary: #0a1930;
-    --bg-secondary: #1a2b4a;
-    --text-primary: #ffffff;
-    --text-secondary: #b8c7e0;
-    --accent-gold: #FFD700;
-    --accent-blue: #4a86e8;
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    /* Dark Theme - OVERRIDE */
+    --bg-primary: #0a1930 !important;
+    --bg-secondary: #1a2b4a !important;
+    --text-primary: #ffffff !important; /* PASTIKAN PUTIH di dark mode */
+    --text-secondary: #b8c7e0 !important;
+    --accent-gold: #FFD700 !important;
+    --accent-blue: #4a86e8 !important;
+    --glass-bg: rgba(255, 255, 255, 0.05) !important;
+    --glass-border: rgba(255, 255, 255, 0.1) !important;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
 }
 
 body {
     font-family: 'Inter', sans-serif;
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
     overflow-x: hidden;
     line-height: 1.6;
+}
+
+body,
+body *:not(.section-title):not(.names):not(.countdown-number):not(.arabic-text) {
+    color: var(--text-primary) !important;
 }
 
 /* ===== TEXT COLOR FIX ===== */
@@ -693,4 +698,47 @@ section {
         bottom: 1rem;
         left: 1rem;
     }
+}
+
+/* Force color untuk semua text elements */
+[data-theme="light"] {
+    /* Pastikan di light mode text HITAM */
+    color: #2c3e50 !important;
+}
+
+[data-theme="light"] p,
+[data-theme="light"] span,
+[data-theme="light"] div,
+[data-theme="light"] .story-paragraph,
+[data-theme="light"] .blessing-text,
+[data-theme="light"] .gratitude-text,
+[data-theme="light"] .event-detail,
+[data-theme="light"] .vows-detail,
+[data-theme="light"] .events-detail,
+[data-theme="light"] .countdown-item,
+[data-theme="light"] .date,
+[data-theme="light"] .quran-verse,
+[data-theme="light"] .copyright {
+    color: #2c3e50 !important;
+}
+
+[data-theme="dark"] {
+    /* Pastikan di dark mode text PUTIH */
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] div,
+[data-theme="dark"] .story-paragraph,
+[data-theme="dark"] .blessing-text,
+[data-theme="dark"] .gratitude-text,
+[data-theme="dark"] .event-detail,
+[data-theme="dark"] .vows-detail,
+[data-theme="dark"] .events-detail,
+[data-theme="dark"] .countdown-item,
+[data-theme="dark"] .date,
+[data-theme="dark"] .quran-verse,
+[data-theme="dark"] .copyright {
+    color: #ffffff !important;
 }

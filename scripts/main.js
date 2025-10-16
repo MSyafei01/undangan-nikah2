@@ -23,10 +23,6 @@ class WeddingInvitation {
         this.startEntranceAnimations();
     }
 
-    // ===== HAPUS SEMUA METHOD THEME INI =====
-    // initTheme() { ... } - HAPUS
-    // applyTheme() { ... } - HAPUS  
-    // toggleTheme() { ... } - HAPUS
 
     // ===== COUNTDOWN TIMER =====
     initCountdown() {
@@ -377,10 +373,7 @@ class WeddingInvitation {
     }
 
     // ===== EVENT LISTENERS =====
-    addEventListeners() {
-        // HAPUS theme toggle listener dari sini
-        // Biarkan theme-toggle.js yang handle
-        
+    addEventListeners() {        
         // Open invitation button
         const openBtn = document.querySelector('.open-btn');
         if (openBtn) {
@@ -521,7 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===== GLOBAL FUNCTIONS FOR HTML ONCLICK =====
-// HAPUS toggleTheme() dari sini
+
 function openInvitation() {
     if (window.weddingApp) {
         window.weddingApp.openInvitation();

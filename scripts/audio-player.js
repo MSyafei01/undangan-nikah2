@@ -42,7 +42,7 @@
             }
 
             // Set audio source - using Beautiful In White Saxophone version
-            this.setAudioSource('https://www.youtube.com/watch?v=JmIUdR_fob0');
+            this.setAudioSource('https://www.youtube.com/watch?v=JmIUdR_fob0&list=RDJmIUdR_fob0&start_radio=1');
             
             // Set initial volume
             this.audio.volume = this.volume;
@@ -51,24 +51,33 @@
             this.setupAudioEvents();
         }
 
-        setAudioSource(url) {
-            // Handle different audio source types
-            if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                // For YouTube links, we'd need to use YouTube IFrame API
-                // For now, we'll use a placeholder or direct audio file
-                console.log('YouTube link detected - would need YouTube IFrame API implementation');
-                // Fallback to a direct audio file if available
-                this.audio.src = 'assets/audio/beautiful-in-white-saxophone.mp3';
-            } else {
-                this.audio.src = url;
-            }
-            
-            // Add error handling for audio source
-            this.audio.addEventListener('error', (e) => {
-                console.error('Audio loading error:', e);
-                this.handleAudioError();
-            });
-        }
+setAudioSource(url) {
+    // Jangan pakai YouTube link langsung di audio element
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+        console.log('YouTube link detected - using fallback audio');
+        
+        // Ganti dengan direct audio file yang bisa diakses
+        // Pilih salah satu dari options berikut:
+        
+        // Option A: Audio dari CDN (reliable)
+        this.audio.src = 'https://www.youtube.com/watch?v=JmIUdR_fob0&list=RDJmIUdR_fob0&start_radio=1';
+        
+        // Option B: Audio wedding-themed dari free sources
+        // this.audio.src = 'https://www.youtube.com/watch?v=JmIUdR_fob0&list=RDJmIUdR_fob0&start_radio=1';
+        
+        // Option C: Upload file kamu sendiri ke hosting
+        // this.audio.src = 'https://www.youtube.com/watch?v=JmIUdR_fob0&list=RDJmIUdR_fob0&start_radio=1';
+        
+    } else {
+        this.audio.src = url;
+    }
+    
+    // Add error handling
+    this.audio.addEventListener('error', (e) => {
+        console.error('Audio loading error:', e);
+        this.handleAudioError();
+    });
+}
 
         setupAudioEvents() {
             this.audio.addEventListener('loadeddata', () => {
