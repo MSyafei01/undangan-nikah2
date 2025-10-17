@@ -1,35 +1,65 @@
-// ===== WEDDING INVITATION MAIN SCRIPT =====
+// ===== ENHANCED WEDDING INVITATION =====
 class WeddingInvitation {
     constructor() {
         this.init();
     }
 
-    // ===== INITIALIZATION =====
     init() {
-        console.log('🎉 Wedding Invitation Initialized!');
+        console.log('🎉 Enhanced Wedding Invitation Initialized!');
         
-        // Initialize all components (HAPUS initTheme())
+        this.initLoadingScreen();
         this.initCountdown();
         this.initScrollAnimations();
-        this.initNavigation();
+        this.initMagneticButtons();
         this.initRSVPForm();
         this.initPerformanceOptimizations();
         this.initErrorHandling();
         
-        // Add event listeners (HAPUS theme listener)
         this.addEventListeners();
-        
-        // Start animations
         this.startEntranceAnimations();
     }
 
-
-    // ===== COUNTDOWN TIMER =====
-    initCountdown() {
-        this.updateCountdown();
-        setInterval(() => this.updateCountdown(), 1000);
+    // ===== LOADING SCREEN =====
+    initLoadingScreen() {
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                if (loadingScreen) {
+                    loadingScreen.classList.add('fade-out');
+                    setTimeout(() => {
+                        loadingScreen.remove();
+                    }, 800);
+                }
+            }, 2000);
+        });
     }
 
+    // ===== MAGNETIC BUTTONS =====
+    initMagneticButtons() {
+        const magneticBtns = document.querySelectorAll('.magnetic-btn');
+        
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const moveX = (x - centerX) * 0.1;
+                const moveY = (y - centerY) * 0.1;
+                
+                btn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        });
+    }
+
+    // ===== ENHANCED COUNTDOWN =====
     updateCountdown() {
         const weddingDate = new Date('November 20, 2025 00:00:00').getTime();
         const now = new Date().getTime();
@@ -42,15 +72,6 @@ class WeddingInvitation {
 
         const time = this.calculateTimeUnits(distance);
         this.displayCountdown(time);
-    }
-
-    calculateTimeUnits(distance) {
-        return {
-            days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-            hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-            minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-            seconds: Math.floor((distance % (1000 * 60)) / 1000)
-        };
     }
 
     displayCountdown(time) {
@@ -77,30 +98,145 @@ class WeddingInvitation {
         element.classList.add('changing');
         element.textContent = newValue;
         
+        // Add particle effect
+        this.createCountdownParticles(element);
+        
         setTimeout(() => {
             element.classList.remove('changing');
         }, 600);
     }
 
-    handleWeddingDay() {
-        const countdownElement = document.getElementById('countdown');
-        if (countdownElement) {
-            countdownElement.innerHTML = `
-                <div class="wedding-day-message">
-                    <h3>🎉 Hari Bahagia Telah Tiba! 🎉</h3>
-                    <p>Selamat datang di hari pernikahan Bima & Putri!</p>
-                </div>
-            `;
+    createCountdownParticles(element) {
+        const rect = element.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        for (let i = 0; i < 5; i++) {
+            this.createParticle(centerX, centerY);
         }
     }
 
-    // ===== SCROLL ANIMATIONS =====
+    // ===== ENHANCED PARTICLE SYSTEM =====
+    createParticle(x, y) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.cssText = `
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            top: ${y}px;
+            left: ${x}px;
+        `;
+        
+        document.body.appendChild(particle);
+        
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 50 + Math.random() * 50;
+        const endX = Math.cos(angle) * distance;
+        const endY = Math.sin(angle) * distance;
+        
+        particle.style.setProperty('--end-x', `${endX}px`);
+        particle.style.setProperty('--end-y', `${endY}px`);
+        
+        particle.style.animation = `particle-explosion 1s ease-out forwards`;
+        
+        setTimeout(() => {
+            if (particle.parentNode) {
+                particle.parentNode.removeChild(particle);
+            }
+        }, 1000);
+    }
+
+    // ===== ENHANCED OPEN INVITATION =====
+    openInvitation() {
+        // Enhanced scroll with parallax effect
+        const blessingSection = document.getElementById('blessing');
+        if (blessingSection) {
+            blessingSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+        
+        // Enhanced audio start
+        if (window.audioPlayer) {
+            window.audioPlayer.play();
+        }
+        
+        // Enhanced celebration effects
+        this.createEnhancedCelebration();
+    }
+
+    createEnhancedCelebration() {
+        // Create more particles
+        for (let i = 0; i < 25; i++) {
+            setTimeout(() => {
+                this.createParticle(
+                    window.innerWidth / 2,
+                    window.innerHeight / 2
+                );
+            }, i * 50);
+        }
+        
+        // Add confetti effect
+        this.createConfetti();
+    }
+
+    createConfetti() {
+        const colors = ['#D4AF37', '#4a86e8', '#FF6B6B', '#4ECDC4', '#FFE66D'];
+        
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.cssText = `
+                    position: fixed;
+                    width: 10px;
+                    height: 20px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    top: -20px;
+                    left: ${Math.random() * 100}vw;
+                    opacity: 0.8;
+                    transform: rotate(${Math.random() * 360}deg);
+                    z-index: 10000;
+                `;
+                
+                document.body.appendChild(confetti);
+                
+                const animation = confetti.animate([
+                    { 
+                        transform: `translateY(0) rotate(0deg)`,
+                        opacity: 1 
+                    },
+                    { 
+                        transform: `translateY(100vh) rotate(${Math.random() * 360}deg)`,
+                        opacity: 0 
+                    }
+                ], {
+                    duration: 2000 + Math.random() * 2000,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+                });
+                
+                animation.onfinish = () => {
+                    if (confetti.parentNode) {
+                        confetti.parentNode.removeChild(confetti);
+                    }
+                };
+            }, i * 100);
+        }
+    }
+
+    // ===== ENHANCED SCROLL ANIMATIONS =====
     initScrollAnimations() {
         this.observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        this.handleElementInView(entry.target);
+                        this.handleEnhancedElementInView(entry.target);
                     }
                 });
             },
@@ -110,18 +246,21 @@ class WeddingInvitation {
             }
         );
 
-        this.observeAnimatableElements();
+        this.observeEnhancedElements();
     }
 
-    observeAnimatableElements() {
+    observeEnhancedElements() {
         const elementsToObserve = [
             '.story-paragraph',
-            '.event-card',
-            '.section-title',
+            '.events-content',
             '.vows-content',
+            '.section-title',
             '.gallery-container',
             '.rsvp-form',
-            '.gratitude-content'
+            '.gratitude-content',
+            '.countdown-item',
+            '.events-detail',
+            '.vows-detail'
         ];
 
         elementsToObserve.forEach(selector => {
@@ -131,362 +270,65 @@ class WeddingInvitation {
         });
     }
 
-    handleElementInView(element) {
+    handleEnhancedElementInView(element) {
+        element.classList.add('animate-in');
+        
         if (element.classList.contains('story-paragraph')) {
             element.classList.add('visible');
-        } else if (element.classList.contains('event-card')) {
-            element.classList.add('fade-in-scale');
-        } else if (element.classList.contains('section-title')) {
-            element.classList.add('slide-in-left');
-        } else {
-            element.classList.add('fade-in-up');
+        }
+        
+        if (element.classList.contains('events-detail') || 
+            element.classList.contains('vows-detail')) {
+            this.animateStaggeredChildren(element.parentElement);
         }
     }
 
-    // ===== NAVIGATION =====
-    initNavigation() {
-        this.setupSmoothScroll();
-        this.setupScrollProgress();
-    }
-
-    setupSmoothScroll() {
-        const links = document.querySelectorAll('a[href^="#"]');
-        
-        links.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    }
-
-    setupScrollProgress() {
-        window.addEventListener('scroll', () => {
-            this.throttle(this.updateScrollProgress, 100)();
-        });
-    }
-
-    updateScrollProgress() {
-        const winHeight = window.innerHeight;
-        const docHeight = document.documentElement.scrollHeight;
-        const scrollTop = window.pageYOffset;
-        const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
-        
-        const progressBar = document.querySelector('.scroll-progress');
-        if (progressBar) {
-            progressBar.style.width = scrollPercent + '%';
-        }
-    }
-
-    // ===== RSVP FORM HANDLING =====
-    initRSVPForm() {
-        const form = document.getElementById('rsvpForm');
-        if (form) {
-            form.addEventListener('submit', (e) => this.handleRSVPSubmit(e));
-            this.setupFormValidation(form);
-        }
-    }
-
-    setupFormValidation(form) {
-        const inputs = form.querySelectorAll('input, select, textarea');
-        
-        inputs.forEach(input => {
-            input.addEventListener('blur', () => this.validateField(input));
-            input.addEventListener('input', () => this.clearFieldError(input));
-        });
-    }
-
-    validateField(field) {
-        const value = field.value.trim();
-        let isValid = true;
-        let errorMessage = '';
-
-        switch (field.type) {
-            case 'text':
-                if (!value) {
-                    isValid = false;
-                    errorMessage = 'Nama lengkap harus diisi';
-                } else if (value.length < 2) {
-                    isValid = false;
-                    errorMessage = 'Nama terlalu pendek';
-                }
-                break;
-                
-            case 'select-one':
-                if (!value) {
-                    isValid = false;
-                    errorMessage = 'Silakan pilih konfirmasi kehadiran';
-                }
-                break;
-                
-            case 'number':
-                if (field.id === 'guests' && value && (value < 1 || value > 5)) {
-                    isValid = false;
-                    errorMessage = 'Jumlah tamu antara 1-5 orang';
-                }
-                break;
-        }
-
-        this.displayFieldValidation(field, isValid, errorMessage);
-        return isValid;
-    }
-
-    displayFieldValidation(field, isValid, message) {
-        this.clearFieldError(field);
-        
-        if (!isValid) {
-            field.classList.add('error');
-            
-            const errorElement = document.createElement('div');
-            errorElement.className = 'error-message';
-            errorElement.textContent = message;
-            errorElement.style.cssText = `
-                color: #ef4444;
-                font-size: 0.8rem;
-                margin-top: 0.25rem;
-            `;
-            
-            field.parentNode.appendChild(errorElement);
-        } else {
-            field.classList.add('valid');
-        }
-    }
-
-    clearFieldError(field) {
-        field.classList.remove('error', 'valid');
-        const existingError = field.parentNode.querySelector('.error-message');
-        if (existingError) {
-            existingError.remove();
-        }
-    }
-
-    async handleRSVPSubmit(e) {
-        e.preventDefault();
-        
-        const form = e.target;
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-        
-        let isFormValid = true;
-        const fields = form.querySelectorAll('input, select, textarea');
-        
-        fields.forEach(field => {
-            if (!this.validateField(field)) {
-                isFormValid = false;
-            }
-        });
-        
-        if (!isFormValid) {
-            this.showNotification('Harap perbaiki data yang masih salah', 'error');
-            return;
-        }
-        
-        const submitBtn = form.querySelector('.submit-btn');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Mengirim...';
-        submitBtn.disabled = true;
-        
-        try {
-            await this.submitRSVPData(data);
-            this.showNotification('Konfirmasi kehadiran berhasil dikirim!', 'success');
-            form.reset();
-        } catch (error) {
-            console.error('RSVP Submission Error:', error);
-            this.showNotification('Gagal mengirim konfirmasi. Silakan coba lagi.', 'error');
-        } finally {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }
-    }
-
-    async submitRSVPData(data) {
-        return new Promise((resolve, reject) => {
+    animateStaggeredChildren(parent) {
+        const children = Array.from(parent.children);
+        children.forEach((child, index) => {
             setTimeout(() => {
-                if (Math.random() > 0.2) {
-                    console.log('RSVP Data Submitted:', data);
-                    resolve(data);
-                } else {
-                    reject(new Error('Network error'));
-                }
-            }, 1500);
+                child.classList.add('stagger-item');
+            }, index * 100);
         });
     }
 
-    // ===== PERFORMANCE OPTIMIZATIONS =====
-    initPerformanceOptimizations() {
-        this.throttleScrollEvents();
-        this.setupLazyLoading();
-        this.preloadResources();
-    }
-
-    throttleScrollEvents() {
-        // Scroll events handled by Intersection Observer
-    }
-
-    setupLazyLoading() {
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.classList.remove('lazy');
-                        imageObserver.unobserve(img);
-                    }
-                });
-            });
-
-            document.querySelectorAll('img[data-src]').forEach(img => {
-                imageObserver.observe(img);
-            });
-        }
-    }
-
-    preloadResources() {
-        // Preload critical resources
-    }
-
-    // ===== ERROR HANDLING =====
-    initErrorHandling() {
-        window.addEventListener('error', (e) => {
-            console.error('Global Error:', e.error);
-        });
-
-        window.addEventListener('unhandledrejection', (e) => {
-            console.error('Unhandled Promise Rejection:', e.reason);
-        });
-    }
-
-    // ===== ENTRANCE ANIMATIONS =====
-    startEntranceAnimations() {
-        document.querySelectorAll('.section-title').forEach((title, index) => {
-            title.style.animationDelay = `${index * 0.2}s`;
-        });
-    }
-
-    // ===== EVENT LISTENERS =====
-    addEventListeners() {        
-        // Open invitation button
-        const openBtn = document.querySelector('.open-btn');
-        if (openBtn) {
-            openBtn.addEventListener('click', () => this.openInvitation());
-        }
+    // ===== ENHANCED UTILITIES =====
+    showEnhancedNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `enhanced-notification ${type}`;
         
-        // Window load event
-        window.addEventListener('load', () => this.onWindowLoad());
+        const icons = {
+            success: '✅',
+            error: '❌',
+            info: '💝'
+        };
         
-        // Resize event (throttled)
-        window.addEventListener('resize', () => this.throttle(this.onWindowResize, 250));
-    }
-
-    openInvitation() {
-        const blessingSection = document.getElementById('blessing');
-        if (blessingSection) {
-            blessingSection.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        if (window.audioPlayer) {
-            window.audioPlayer.play();
-        }
-        
-        this.createCelebrationEffects();
-    }
-
-    createCelebrationEffects() {
-        for (let i = 0; i < 15; i++) {
-            this.createParticle();
-        }
-    }
-
-    createParticle() {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.cssText = `
-            position: fixed;
-            width: 6px;
-            height: 6px;
-            background: var(--accent-gold);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 10000;
-            top: 50%;
-            left: 50%;
-            animation: float 2s ease-out forwards;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <span class="notification-icon">${icons[type]}</span>
+                <span class="notification-message">${message}</span>
+            </div>
         `;
         
-        document.body.appendChild(particle);
-        
-        const angle = Math.random() * Math.PI * 2;
-        const distance = 100 + Math.random() * 100;
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance;
-        
-        particle.style.setProperty('--end-x', `${x}px`);
-        particle.style.setProperty('--end-y', `${y}px`);
-        
-        setTimeout(() => {
-            if (particle.parentNode) {
-                particle.parentNode.removeChild(particle);
-            }
-        }, 2000);
-    }
-
-    onWindowLoad() {
-        console.log('🚀 Wedding invitation fully loaded!');
-        document.body.classList.add('loaded');
-    }
-
-    onWindowResize() {
-        this.handleResponsiveAdjustments();
-    }
-
-    handleResponsiveAdjustments() {
-        // Responsive adjustments
-    }
-
-    // ===== UTILITY FUNCTIONS =====
-    throttle(func, limit) {
-        let inThrottle;
-        return function() {
-            const args = arguments;
-            const context = this;
-            if (!inThrottle) {
-                func.apply(context, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        }
-    }
-
-    showNotification(message, type = 'info') {
-        const notification = document.createElement('div');
-        notification.className = `notification ${type}`;
-        notification.textContent = message;
         notification.style.cssText = `
             position: fixed;
             top: 20px;
             right: 20px;
             padding: 1rem 1.5rem;
-            border-radius: 8px;
+            border-radius: 15px;
             color: white;
             z-index: 10000;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            max-width: 300px;
+            transform: translateX(400px);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            max-width: 350px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
         `;
         
         const colors = {
-            success: '#10b981',
-            error: '#ef4444',
-            info: '#3b82f6'
+            success: 'rgba(16, 185, 129, 0.9)',
+            error: 'rgba(239, 68, 68, 0.9)',
+            info: 'rgba(212, 175, 55, 0.9)'
         };
         
         notification.style.background = colors[type] || colors.info;
@@ -498,24 +340,23 @@ class WeddingInvitation {
         }, 100);
         
         setTimeout(() => {
-            notification.style.transform = 'translateX(100%)';
+            notification.style.transform = 'translateX(400px)';
             setTimeout(() => {
                 if (notification.parentNode) {
                     notification.parentNode.removeChild(notification);
                 }
-            }, 300);
-        }, 5000);
+            }, 500);
+        }, 4000);
     }
 }
 
-// ===== INITIALIZE APPLICATION =====
+// ===== INITIALIZE ENHANCED APPLICATION =====
 document.addEventListener('DOMContentLoaded', () => {
     window.weddingApp = new WeddingInvitation();
 });
 
-// ===== GLOBAL FUNCTIONS FOR HTML ONCLICK =====
-
-function openInvitation() {
+// ===== GLOBAL FUNCTIONS =====
+function startWeddingExperience() {
     if (window.weddingApp) {
         window.weddingApp.openInvitation();
     }
