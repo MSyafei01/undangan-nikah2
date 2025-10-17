@@ -14,10 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Theme Toggle -->
-    <div class="theme-toggle" onclick="toggleTheme()">
-        🌙
-    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
@@ -48,9 +44,12 @@
                 </div>
             </div>
 
-            <button class="open-btn" onclick="openInvitation()">
+
+            <button class="open-btn" onclick="startWeddingExperience()" onclick="openInvitation()" >
                 Buka Undangan
             </button>
+
+
         </div>
     </section>
 
@@ -253,21 +252,21 @@
     </footer>
 
 <!-- Audio Element -->
-<audio id="weddingMusic" loop preload="auto">
-    <!-- Gunakan file audio offline -->
+<audio id="weddingMusic" loop>
     <source src="assets/audio/SaxophoneWedding.mp3" type="audio/mpeg">
     Browser Anda tidak mendukung elemen audio.
 </audio>
 
 <!-- Audio Control -->
-<div class="audio-control" onclick="toggleMusic()">
-    🔇
+<div class="audio-control" id="audioControl">
+    <span id="musicIcon">🔇</span>
 </div>
+
 
     <!-- JavaScript Files -->
     <script src="scripts/main.js"></script>
     <script src="scripts/audio-player.js"></script>
-    <script src="scripts/theme-toggle.js"></script>
+    <!-- <script src="scripts/theme-toggle.js"></script> -->
     <script src="scripts/gallery.js"></script>
 </body>
 </html>
