@@ -19,6 +19,8 @@ class WeddingInvitation {
         this.startEntranceAnimations();
     }
 
+    
+
     // ===== LOADING SCREEN =====
     initLoadingScreen() {
         window.addEventListener('load', () => {
@@ -152,83 +154,44 @@ class WeddingInvitation {
     }
 
     // ===== ENHANCED OPEN INVITATION =====
-    openInvitation() {
-        // Enhanced scroll with parallax effect
-        const blessingSection = document.getElementById('blessing');
-        if (blessingSection) {
-            blessingSection.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-        
-        // Enhanced audio start
-        if (window.audioPlayer) {
-            window.audioPlayer.play();
-        }
-        
-        // Enhanced celebration effects
-        this.createEnhancedCelebration();
-    }
 
-    createEnhancedCelebration() {
-        // Create more particles
-        for (let i = 0; i < 25; i++) {
-            setTimeout(() => {
-                this.createParticle(
-                    window.innerWidth / 2,
-                    window.innerHeight / 2
-                );
-            }, i * 50);
-        }
-        
-        // Add confetti effect
-        this.createConfetti();
-    }
 
-    createConfetti() {
-        const colors = ['#D4AF37', '#4a86e8', '#FF6B6B', '#4ECDC4', '#FFE66D'];
-        
-        for (let i = 0; i < 50; i++) {
-            setTimeout(() => {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.cssText = `
-                    position: fixed;
-                    width: 10px;
-                    height: 20px;
-                    background: ${colors[Math.floor(Math.random() * colors.length)]};
-                    top: -20px;
-                    left: ${Math.random() * 100}vw;
-                    opacity: 0.8;
-                    transform: rotate(${Math.random() * 360}deg);
-                    z-index: 10000;
-                `;
-                
-                document.body.appendChild(confetti);
-                
-                const animation = confetti.animate([
-                    { 
-                        transform: `translateY(0) rotate(0deg)`,
-                        opacity: 1 
-                    },
-                    { 
-                        transform: `translateY(100vh) rotate(${Math.random() * 360}deg)`,
-                        opacity: 0 
-                    }
-                ], {
-                    duration: 2000 + Math.random() * 2000,
-                    easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
-                });
-                
-                animation.onfinish = () => {
-                    if (confetti.parentNode) {
-                        confetti.parentNode.removeChild(confetti);
-                    }
-                };
-            }, i * 100);
-        }
+    
+openInvitation() {
+    console.log('🎊 Opening invitation...');
+    
+    // Enhanced scroll dengan element yang benar
+    const blessingSection = document.getElementById('blessing');
+    if (blessingSection) {
+        console.log('📍 Scrolling to blessing section');
+        blessingSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+    } else {
+        console.error('❌ Blessing section not found');
+        // Fallback: scroll ke bawah biasa
+        window.scrollTo({
+            top: window.innerHeight,
+            behavior: 'smooth'
+        });
     }
+    
+    // Enhanced audio start
+    if (window.audioPlayer) {
+        console.log('🎵 Starting audio...');
+        window.audioPlayer.play();
+    } else {
+        console.warn('⚠️ Audio player not found');
+    }
+    
+    // Enhanced celebration effects
+    this.createEnhancedCelebration();
+    
+    // Tambahkan class untuk menandai undangan sudah dibuka
+    document.body.classList.add('invitation-opened');
+}
+
 
     // ===== ENHANCED SCROLL ANIMATIONS =====
     initScrollAnimations() {
@@ -350,6 +313,10 @@ class WeddingInvitation {
     }
 }
 
+
+
+
+
 // ===== INITIALIZE ENHANCED APPLICATION =====
 document.addEventListener('DOMContentLoaded', () => {
     window.weddingApp = new WeddingInvitation();
@@ -357,8 +324,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== GLOBAL FUNCTIONS =====
 function startWeddingExperience() {
+    console.log('🚀 Starting wedding experience...');
+    
     if (window.weddingApp) {
         window.weddingApp.openInvitation();
+    } else {
+        console.error('❌ Wedding app not initialized');
+        // Fallback langsung scroll
+        const blessingSection = document.getElementById('blessing');
+        if (blessingSection) {
+            blessingSection.scrollIntoView({ behavior: 'smooth' });
+        }
     }
 }
 
