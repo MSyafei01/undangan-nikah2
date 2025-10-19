@@ -314,35 +314,6 @@ openInvitation() {
     }
 }
 
-
-
-// ===== INITIALIZE ENHANCED APPLICATION =====
-document.addEventListener('DOMContentLoaded', () => {
-    window.weddingApp = new WeddingInvitation();
-});
-
-// ===== GLOBAL FUNCTIONS =====
-function startWeddingExperience() {
-    console.log('🚀 Starting wedding experience...');
-    
-    if (window.weddingApp) {
-        window.weddingApp.openInvitation();
-    } else {
-        console.error('❌ Wedding app not initialized');
-        // Fallback langsung scroll
-        const blessingSection = document.getElementById('blessing');
-        if (blessingSection) {
-            blessingSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    }
-}
-
-function toggleMusic() {
-    if (window.audioPlayer) {
-        window.audioPlayer.toggle();
-    }
-}
-
 // ===== TEST FUNCTION =====
     function testScroll() {
     console.log('🎯 TEST: Button clicked');
@@ -369,5 +340,35 @@ function toggleMusic() {
     if (window.audioPlayer) {
         window.audioPlayer.play();
         console.log('🎵 Audio started');
+    }
+}
+
+
+
+
+// ===== INITIALIZE ENHANCED APPLICATION =====
+document.addEventListener('DOMContentLoaded', () => {
+    window.weddingApp = new WeddingInvitation();
+});
+
+// ===== GLOBAL FUNCTIONS =====
+function startWeddingExperience() {
+    console.log('🚀 Starting wedding experience...');
+    
+    if (window.weddingApp) {
+        window.weddingApp.openInvitation();
+    } else {
+        console.error('❌ Wedding app not initialized');
+        // Fallback langsung scroll
+        const blessingSection = document.getElementById('blessing');
+        if (blessingSection) {
+            blessingSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+}
+
+function toggleMusic() {
+    if (window.audioPlayer) {
+        window.audioPlayer.toggle();
     }
 }
