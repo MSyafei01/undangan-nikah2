@@ -1,11 +1,11 @@
-// ===== ENHANCED WEDDING INVITATION =====
+// ===== WEDDING INVITATION MAIN SCRIPT =====
 class WeddingInvitation {
     constructor() {
         this.init();
     }
 
     init() {
-        console.log('🎉 Enhanced Wedding Invitation Initialized!');
+        console.log('🎉 Wedding Invitation Initialized!');
         
         this.initLoadingScreen();
         this.initCountdown();
@@ -19,7 +19,75 @@ class WeddingInvitation {
         this.startEntranceAnimations();
     }
 
+    // ===== COUNTDOWN TIMER =====
+    initCountdown() {
+        this.updateCountdown();
+        setInterval(() => this.updateCountdown(), 1000);
+    }
 
+    updateCountdown() {
+        const weddingDate = new Date('November 20, 2025 00:00:00').getTime();
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        if (distance < 0) {
+            this.handleWeddingDay();
+            return;
+        }
+
+        const time = this.calculateTimeUnits(distance);
+        this.displayCountdown(time);
+    }
+
+    calculateTimeUnits(distance) {
+        return {
+            days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+            minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+            seconds: Math.floor((distance % (1000 * 60)) / 1000)
+        };
+    }
+
+    displayCountdown(time) {
+        const elements = {
+            days: document.getElementById('days'),
+            hours: document.getElementById('hours'),
+            minutes: document.getElementById('minutes'),
+            seconds: document.getElementById('seconds')
+        };
+
+        Object.keys(time).forEach(unit => {
+            if (elements[unit]) {
+                const currentValue = elements[unit].textContent;
+                const newValue = time[unit].toString().padStart(2, '0');
+                
+                if (currentValue !== newValue) {
+                    this.animateCountdownChange(elements[unit], newValue);
+                }
+            }
+        });
+    }
+
+    animateCountdownChange(element, newValue) {
+        element.classList.add('changing');
+        element.textContent = newValue;
+        
+        setTimeout(() => {
+            element.classList.remove('changing');
+        }, 600);
+    }
+
+    handleWeddingDay() {
+        const countdownElement = document.getElementById('countdown');
+        if (countdownElement) {
+            countdownElement.innerHTML = `
+                <div class="wedding-day-message">
+                    <h3>🎉 Hari Bahagia Telah Tiba! 🎉</h3>
+                    <p>Selamat datang di hari pernikahan Bima & Putri!</p>
+                </div>
+            `;
+        }
+    }
 
 
     // ===== LOADING SCREEN =====
@@ -61,6 +129,114 @@ class WeddingInvitation {
             });
         });
     }
+
+    // ===== SCROLL ANIMATIONS =====
+    initScrollAnimations() {
+        this.observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.handleElementInView(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            }
+        );
+
+        this.observeAnimatableElements();
+    }
+
+    observeAnimatableElements() {
+        const elementsToObserve = [
+            '.blessing-paragraph',
+            '.timeline-item',
+            '.events-content',
+            '.vows-content',
+            '.gallery-container',
+            '.rsvp-form'
+        ];
+
+        elementsToObserve.forEach(selector => {
+            document.querySelectorAll(selector).forEach(element => {
+                this.observer.observe(element);
+            });
+        });
+    }
+
+    handleElementInView(element) {
+        element.classList.add('animate-in');
+    }
+
+
+    // ===== RSVP FORM =====
+    initRSVPForm() {
+        const form = document.getElementById('rsvpForm');
+        if (form) {
+            form.addEventListener('submit', (e) => this.handleRSVPSubmit(e));
+        }
+    }
+
+    async handleRSVPSubmit(e) {
+        e.preventDefault();
+        
+        const form = e.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        
+        const submitBtn = form.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Mengirim...';
+        submitBtn.disabled = true;
+        
+        try {
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            console.log('RSVP Data:', data);
+            this.showNotification('Konfirmasi kehadiran berhasil dikirim!', 'success');
+            form.reset();
+        } catch (error) {
+            console.error('RSVP Error:', error);
+            this.showNotification('Gagal mengirim konfirmasi. Silakan coba lagi.', 'error');
+        } finally {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
+    }
+
+    // ===== PERFORMANCE & ERROR HANDLING =====
+    initPerformanceOptimizations() {
+        // Optimizations here
+    }
+
+    initErrorHandling() {
+        window.addEventListener('error', (e) => {
+            console.error('Global Error:', e.error);
+        });
+    }
+
+    // ===== EVENT LISTENERS =====
+    addEventListeners() {
+        // Window load event
+        window.addEventListener('load', () => this.onWindowLoad());
+    }
+
+    onWindowLoad() {
+        console.log('🚀 Website fully loaded!');
+        document.body.classList.add('loaded');
+    }
+
+
+
+
+
+    
+
+
+
+    
 
     // ===== ENHANCED COUNTDOWN =====
     updateCountdown() {
@@ -153,46 +329,6 @@ class WeddingInvitation {
             }
         }, 1000);
     }
-
-    // ===== ENHANCED OPEN INVITATION =====
-
-
-    
-openInvitation() {
-    console.log('🎊 Opening invitation...');
-    
-    // Enhanced scroll dengan element yang benar
-    const blessingSection = document.getElementById('blessing');
-    if (blessingSection) {
-        console.log('📍 Scrolling to blessing section');
-        blessingSection.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-        });
-    } else {
-        console.error('❌ Blessing section not found');
-        // Fallback: scroll ke bawah biasa
-        window.scrollTo({
-            top: window.innerHeight,
-            behavior: 'smooth'
-        });
-    }
-    
-    // Enhanced audio start
-    if (window.audioPlayer) {
-        console.log('🎵 Starting audio...');
-        window.audioPlayer.play();
-    } else {
-        console.warn('⚠️ Audio player not found');
-    }
-    
-    // Enhanced celebration effects
-    this.createEnhancedCelebration();
-    
-    // Tambahkan class untuk menandai undangan sudah dibuka
-    document.body.classList.add('invitation-opened');
-}
-
 
     // ===== ENHANCED SCROLL ANIMATIONS =====
     initScrollAnimations() {
@@ -314,61 +450,9 @@ openInvitation() {
     }
 }
 
-// ===== TEST FUNCTION =====
-    function testScroll() {
-    console.log('🎯 TEST: Button clicked');
-    
-    // Test 1: Basic scroll
-    console.log('📍 Window height:', window.innerHeight);
-    console.log('📜 Document height:', document.documentElement.scrollHeight);
-    
-    // Test 2: Scroll dengan window.scrollTo
-    window.scrollTo({
-        top: window.innerHeight,
-        behavior: 'smooth'
-    });
-    console.log('✅ Test 2: window.scrollTo executed');
-    
-    // Test 3: Cek blessing section
-    const blessingSection = document.getElementById('blessing');
-    console.log('📍 Blessing section:', blessingSection);
-    if (blessingSection) {
-        console.log('📏 Blessing section position:', blessingSection.getBoundingClientRect());
-    }
-    
-    // Test 4: Play audio
-    if (window.audioPlayer) {
-        window.audioPlayer.play();
-        console.log('🎵 Audio started');
-    }
-}
-
-
-
 
 // ===== INITIALIZE ENHANCED APPLICATION =====
 document.addEventListener('DOMContentLoaded', () => {
     window.weddingApp = new WeddingInvitation();
 });
 
-// ===== GLOBAL FUNCTIONS =====
-function startWeddingExperience() {
-    console.log('🚀 Starting wedding experience...');
-    
-    if (window.weddingApp) {
-        window.weddingApp.openInvitation();
-    } else {
-        console.error('❌ Wedding app not initialized');
-        // Fallback langsung scroll
-        const blessingSection = document.getElementById('blessing');
-        if (blessingSection) {
-            blessingSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    }
-}
-
-function toggleMusic() {
-    if (window.audioPlayer) {
-        window.audioPlayer.toggle();
-    }
-}

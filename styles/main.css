@@ -1090,6 +1090,11 @@ html {
     scroll-behavior: smooth;
 }
 
+body, html {
+    overflow-x: hidden;
+    overflow-y: auto !important; /* Force scroll */
+}
+
 /* ===== CUSTOM SELECTION ===== */
 ::selection {
     background: rgba(212, 175, 55, 0.3);
