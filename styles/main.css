@@ -26,6 +26,10 @@
     --text-7xl: 4.5rem;
 }
 
+    * {
+    max-height: none !important;
+}
+
 /* ===== LOADING SCREEN ===== */
 .loading-screen {
     position: fixed;
@@ -79,11 +83,12 @@
 /* ===== ENHANCED HERO SECTION ===== */
 .hero {
     min-height: 100vh;
+    height: auto !important;
+    overflow: visible !important;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    overflow: hidden;
     background: linear-gradient(135deg, 
         rgba(212, 175, 55, 0.1) 0%,
         rgba(74, 134, 232, 0.1) 50%,
