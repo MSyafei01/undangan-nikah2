@@ -19,8 +19,6 @@ class WeddingInvitation {
         this.startEntranceAnimations();
     }
 
-    
-
     // ===== LOADING SCREEN =====
     initLoadingScreen() {
         window.addEventListener('load', () => {
@@ -312,8 +310,6 @@ openInvitation() {
         }, 4000);
     }
 }
-
-
 
 
 
