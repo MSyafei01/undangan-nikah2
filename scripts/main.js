@@ -231,7 +231,6 @@ class WeddingInvitation {
 
 
 
-
     
 
 
@@ -449,6 +448,7 @@ class WeddingInvitation {
         }, 4000);
     }
 }
+
 
 
 // ===== INITIALIZE ENHANCED APPLICATION =====
