@@ -19,6 +19,9 @@ class WeddingInvitation {
         this.startEntranceAnimations();
     }
 
+
+
+
     // ===== LOADING SCREEN =====
     initLoadingScreen() {
         window.addEventListener('load', () => {
@@ -337,5 +340,34 @@ function startWeddingExperience() {
 function toggleMusic() {
     if (window.audioPlayer) {
         window.audioPlayer.toggle();
+    }
+}
+
+// ===== TEST FUNCTION =====
+    function testScroll() {
+    console.log('🎯 TEST: Button clicked');
+    
+    // Test 1: Basic scroll
+    console.log('📍 Window height:', window.innerHeight);
+    console.log('📜 Document height:', document.documentElement.scrollHeight);
+    
+    // Test 2: Scroll dengan window.scrollTo
+    window.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+    });
+    console.log('✅ Test 2: window.scrollTo executed');
+    
+    // Test 3: Cek blessing section
+    const blessingSection = document.getElementById('blessing');
+    console.log('📍 Blessing section:', blessingSection);
+    if (blessingSection) {
+        console.log('📏 Blessing section position:', blessingSection.getBoundingClientRect());
+    }
+    
+    // Test 4: Play audio
+    if (window.audioPlayer) {
+        window.audioPlayer.play();
+        console.log('🎵 Audio started');
     }
 }
