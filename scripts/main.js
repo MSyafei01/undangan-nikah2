@@ -310,6 +310,88 @@ createFloatingHeart() {
     }, 2000);
 }
 
+// ===== NOTIFICATION SYSTEM =====
+showNotification(message, type = 'info') {
+    console.log(`📢 Notification [${type}]: ${message}`);
+    
+    // Remove existing notifications
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notif => notif.remove());
+    
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    
+    const icons = {
+        success: '✅',
+        error: '❌',
+        info: '💝',
+        warning: '⚠️'
+    };
+    
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span class="notification-icon">${icons[type] || '💝'}</span>
+            <span class="notification-message">${message}</span>
+        </div>
+    `;
+    
+    // Styling untuk notification
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        color: white;
+        z-index: 10000;
+        transform: translateX(400px);
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        max-width: 400px;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255,255,255,0.2);
+        font-family: var(--font-secondary);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    `;
+    
+    const colors = {
+        success: 'linear-gradient(135deg, #10b981, #059669)',
+        error: 'linear-gradient(135deg, #ef4444, #dc2626)',
+        info: 'linear-gradient(135deg, var(--accent-gold), var(--accent-blue))',
+        warning: 'linear-gradient(135deg, #f59e0b, #d97706)'
+    };
+    
+    notification.style.background = colors[type] || colors.info;
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(400px)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 500);
+    }, 5000);
+    
+    // Click to dismiss
+    notification.addEventListener('click', () => {
+        notification.style.transform = 'translateX(400px)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    });
+}
+
+
+
 
 
     // ===== PERFORMANCE & ERROR HANDLING =====
