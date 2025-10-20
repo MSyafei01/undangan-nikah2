@@ -310,6 +310,8 @@ createFloatingHeart() {
     }, 2000);
 }
 
+
+
     // ===== PERFORMANCE & ERROR HANDLING =====
     initPerformanceOptimizations() {
         // Optimizations here
