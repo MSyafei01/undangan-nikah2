@@ -231,11 +231,6 @@ class WeddingInvitation {
 
 
 
-    
-
-
-
-    
 
     // ===== ENHANCED COUNTDOWN =====
     updateCountdown() {
