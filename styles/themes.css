@@ -12,6 +12,7 @@
         --opacity-transition: opacity var(--theme-transition-duration) var(--theme-transition-timing);
     }
 
+    
     /* ===== SMOOTH THEME TRANSITIONS ===== */
 body,
 .hero,
@@ -324,6 +325,7 @@ body,
         padding-left: 1rem;
     }
 
+
     /* ===== THEME SWITCH ANIMATION ===== */
     @keyframes themeSwitch {
         0% {
@@ -340,6 +342,7 @@ body,
     .theme-switching {
         animation: themeSwitch 0.6s var(--theme-transition-timing);
     }
+
 
     /* ===== PREFERS-COLOR-SCHEME DETECTION ===== */
     @media (prefers-color-scheme: dark) {
@@ -366,6 +369,7 @@ body,
         }
     }
 
+
     /* ===== HIGH CONTRAST THEME SUPPORT ===== */
     @media (prefers-contrast: high) {
         :root {
@@ -383,6 +387,7 @@ body,
             --text-secondary: #cccccc;
         }
     }
+
 
     /* ===== REDUCED TRANSPARENCY SUPPORT ===== */
     @media (prefers-reduced-transparency: reduce) {
@@ -403,6 +408,7 @@ body,
             -webkit-backdrop-filter: none;
         }
     }
+
 
     /* ===== BASIC ANIMATIONS ===== */
 @keyframes fadeIn {
