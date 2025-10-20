@@ -71,7 +71,7 @@ body,
             /* Auto dark theme if user prefers dark and no theme set */
             --bg-primary: #e4e8f1;
             --bg-secondary: #e2e6ed;
-            --text-primary: #000001;
+            --text-primary: #4e626a;
             --text-secondary: #6f7a89;
             --accent-gold: #f59e0b;
             --accent-blue: #60a5fa;
@@ -83,7 +83,7 @@ body,
             /* Auto light theme if user prefers light and no theme set */
             --bg-primary: #ffffff;
             --bg-secondary: #f8fafc;
-            --text-primary: #000000;
+            --text-primary: #4e626a;
             --text-secondary: #47515e;
             --accent-gold: #b45309;
             --accent-blue: #1d4ed8;

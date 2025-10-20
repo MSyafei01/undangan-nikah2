@@ -40,7 +40,7 @@
     }
     50% {
         text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 
-                     0 0 30px rgba(212, 175, 55, 0.6);
+                    0 0 30px rgba(212, 175, 55, 0.6);
     }
 }
 
@@ -181,4 +181,52 @@
         height: 150%;
         opacity: 0;
     }
+}
+
+/* ===== RSVP SUCCESS ANIMATION ===== */
+@keyframes floatUp {
+    0% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) translateY(-100px);
+        opacity: 0;
+    }
+}
+
+.rsvp-form.success-animation {
+    animation: gentlePulse 2s ease-in-out;
+}
+
+@keyframes gentlePulse {
+    0%, 100% {
+        box-shadow: 0 8px 32px rgba(212, 175, 55, 0.1);
+    }
+    50% {
+        box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
+    }
+}
+
+/* ===== FORM VALIDATION STYLES ===== */
+.form-group input:invalid,
+.form-group select:invalid,
+.form-group textarea:invalid {
+    border-color: #ef4444;
+}
+
+.form-group input:valid,
+.form-group select:valid,
+.form-group textarea:valid {
+    border-color: #10b981;
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.submit-btn .fa-spinner {
+    margin-right: 0.5rem;
 }
