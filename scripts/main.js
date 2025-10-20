@@ -172,39 +172,143 @@ class WeddingInvitation {
 
 
     // ===== RSVP FORM =====
-    initRSVPForm() {
-        const form = document.getElementById('rsvpForm');
-        if (form) {
-            form.addEventListener('submit', (e) => this.handleRSVPSubmit(e));
-        }
+initRSVPForm() {
+    const form = document.getElementById('rsvpForm');
+    if (form) {
+        form.addEventListener('submit', (e) => this.handleRSVPSubmit(e));
+        console.log('✅ RSVP form initialized');
+    } else {
+        console.error('❌ RSVP form not found');
     }
+}
 
-    async handleRSVPSubmit(e) {
-        e.preventDefault();
+async handleRSVPSubmit(e) {
+    e.preventDefault();
+    console.log('📝 RSVP form submitted');
+    
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+    
+    console.log('📊 Form data:', data);
+    
+    // Validasi form
+    if (!this.validateRSVPForm(data)) {
+        console.log('❌ Form validation failed');
+        return;
+    }
+    
+    const submitBtn = form.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    const originalHTML = submitBtn.innerHTML;
+    
+    // Update button state
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+    submitBtn.disabled = true;
+    
+    try {
+        console.log('🔄 Simulating API call...');
         
-        const form = e.target;
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
+        // Simulate API call dengan delay
+        await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                // Simulate random success (90% success rate)
+                if (Math.random() > 0.1) {
+                    resolve(data);
+                } else {
+                    reject(new Error('Network error'));
+                }
+            }, 2000);
+        });
         
-        const submitBtn = form.querySelector('.submit-btn');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Mengirim...';
-        submitBtn.disabled = true;
+        console.log('✅ RSVP submitted successfully');
         
-        try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            console.log('RSVP Data:', data);
-            this.showNotification('Konfirmasi kehadiran berhasil dikirim!', 'success');
-            form.reset();
-        } catch (error) {
-            console.error('RSVP Error:', error);
-            this.showNotification('Gagal mengirim konfirmasi. Silakan coba lagi.', 'error');
-        } finally {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
+        // Show success notification
+        this.showNotification('🎉 Konfirmasi kehadiran berhasil dikirim! Terima kasih atas doa dan restunya.', 'success');
+        
+        // Reset form
+        form.reset();
+        console.log('✅ Form reset successfully');
+        
+        // Add celebration effect
+        this.createRsvpSuccessEffect();
+        
+    } catch (error) {
+        console.error('❌ RSVP submission failed:', error);
+        this.showNotification('❌ Gagal mengirim konfirmasi. Silakan coba lagi dalam beberapa saat.', 'error');
+    } finally {
+        // Restore button state
+        submitBtn.innerHTML = originalHTML;
+        submitBtn.disabled = false;
+        console.log('🔄 Button state restored');
+    }
+}
+
+validateRSVPForm(data) {
+    console.log('🔍 Validating form data...');
+    
+    // Check required fields
+    if (!data.name || data.name.trim() === '') {
+        this.showNotification('❌ Harap isi nama lengkap', 'error');
+        return false;
+    }
+    
+    if (!data.attendance) {
+        this.showNotification('❌ Harap pilih konfirmasi kehadiran', 'error');
+        return false;
+    }
+    
+    // Validate guests count if attending
+    if (data.attendance === 'hadir') {
+        const guests = parseInt(data.guests) || 0;
+        if (guests < 1 || guests > 6) {
+            this.showNotification('❌ Jumlah tamu harus antara 1-6 orang', 'error');
+            return false;
         }
     }
+    
+    console.log('✅ Form validation passed');
+    return true;
+}
+
+createRsvpSuccessEffect() {
+    // Create celebration effect for RSVP success
+    const form = document.getElementById('rsvpForm');
+    if (form) {
+        form.classList.add('success-animation');
+        setTimeout(() => {
+            form.classList.remove('success-animation');
+        }, 2000);
+    }
+    
+    // Create some hearts animation
+    for (let i = 0; i < 8; i++) {
+        setTimeout(() => this.createFloatingHeart(), i * 200);
+    }
+}
+
+createFloatingHeart() {
+    const heart = document.createElement('div');
+    heart.innerHTML = '💖';
+    heart.style.cssText = `
+        position: fixed;
+        font-size: 1.5rem;
+        z-index: 10000;
+        pointer-events: none;
+        animation: floatUp 2s ease-in forwards;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+    `;
+    
+    document.body.appendChild(heart);
+    
+    setTimeout(() => {
+        if (heart.parentNode) {
+            heart.parentNode.removeChild(heart);
+        }
+    }, 2000);
+}
 
     // ===== PERFORMANCE & ERROR HANDLING =====
     initPerformanceOptimizations() {
