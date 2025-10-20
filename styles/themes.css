@@ -213,36 +213,6 @@ body,
         box-shadow: 0 0 15px rgba(245, 158, 11, 0.7);
     }
 
-    /* Specific section backgrounds */
-    [data-theme="light"] .blessing,
-    [data-theme="light"] .wedding-events,
-    [data-theme="light"] .sacred-vows,
-    [data-theme="light"] .gratitude {
-        background: var(--bg-secondary) !important;
-    }
-
-    [data-theme="dark"] .blessing,
-    [data-theme="dark"] .wedding-events,
-    [data-theme="dark"] .sacred-vows,
-    [data-theme="dark"] .gratitude {
-        background: var(--bg-secondary) !important;
-    }
-
-    [data-theme="light"] .love-story,
-    [data-theme="light"] .gallery,
-    [data-theme="light"] .rsvp,
-    [data-theme="light"] .footer {
-        background: var(--bg-primary) !important;
-    }
-
-    [data-theme="dark"] .love-story,
-    [data-theme="dark"] .gallery,
-    [data-theme="dark"] .rsvp,
-    [data-theme="dark"] .footer {
-        background: var(--bg-primary) !important;
-    }
-
-    
 
     /* Text Color Themes */
     [data-theme="light"] .section-title {
