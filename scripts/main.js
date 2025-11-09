@@ -14,9 +14,8 @@ class WeddingInvitation {
         this.initRSVPForm();
         this.initPerformanceOptimizations();
         this.initErrorHandling();
-        
         this.addEventListeners();
-        this.startEntranceAnimations();
+
     }
 
     // ===== COUNTDOWN TIMER =====
@@ -107,7 +106,7 @@ class WeddingInvitation {
 
     // ===== MAGNETIC BUTTONS =====
     initMagneticButtons() {
-        const magneticBtns = document.querySelectorAll('.magnetic-btn');
+        const magneticBtns = document.querySelectorAll('.open-btn');
         
         magneticBtns.forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
