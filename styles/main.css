@@ -1,3 +1,107 @@
+
+/* Hide all sections initially except hero */
+.section {
+    display: none;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease;
+}
+
+.section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero section always visible */
+.hero {
+    display: flex !important;
+    opacity: 1 !important;
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Ensure hero content is properly centered */
+.hero-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Open button animations */
+.open-btn.opening {
+    animation: buttonScaleDown 1.5s ease-in-out forwards;
+}
+
+@keyframes buttonScaleDown {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        background: linear-gradient(135deg, var(--accent-blue), var(--accent-gold));
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+        display: none;
+    }
+}
+
+/* Scroll indicator hide animation */
+.scroll-indicator.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+/* Enhanced magnetic button for open button */
+.open-btn.magnetic-btn {
+    position: relative;
+    z-index: 100;
+    margin-top: 3rem;
+}
+
+/* Loading screen enhancement */
+.loading-screen {
+    background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+}
+
+/* Audio control positioning */
+.audio-control {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    background: var(--glass-bg);
+    backdrop-filter: var(--backdrop-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 1s ease 2s forwards;
+}
+
+.audio-control.playing {
+    background: var(--accent-gold);
+    color: white;
+}
+
 /* ===== ENHANCED TYPOGRAPHY SYSTEM ===== */
 :root {
     /* Font Families */
@@ -26,7 +130,7 @@
     --text-7xl: 4.5rem;
 }
 
-    * {
+* {
     max-height: none !important;
 }
 
@@ -330,8 +434,6 @@
 }
 
 /* ===== MAGNETIC BUTTON ===== */
-
-
 .btn-text {
     position: relative;
     z-index: 2;
@@ -341,7 +443,6 @@
     font-size: 1.2em;
     transition: transform 0.3s ease;
 }
-
 
 /* ===== SCROLL INDICATOR ===== */
 .scroll-indicator {
@@ -383,7 +484,6 @@
     letter-spacing: 0.1em;
 }
 
-
 /* ===== ENHANCED SECTION HEADERS ===== */
 .section-header {
     text-align: center;
@@ -396,7 +496,6 @@
     color: var(--accent-gold);
     margin-top: 0.5rem;
 }
-
 
 /* ===== ENHANCED SECTION TITLES ===== */
 .section-title {
@@ -466,7 +565,6 @@
 .vows-image:hover img {
     transform: scale(1.05);
 }
-
 
 /* ===== BLESSING SECTION ===== */
 .blessing {

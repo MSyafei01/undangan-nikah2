@@ -229,3 +229,67 @@
 .submit-btn .fa-spinner {
     margin-right: 0.5rem;
 }
+
+/* ===== MUSIC PLAYER ANIMATIONS ===== */
+@keyframes musicPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.audio-control.playing {
+    animation: musicPulse 2s ease-in-out infinite;
+}
+
+/* ===== NOTIFICATION ANIMATIONS ===== */
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
+.notification {
+    animation: slideInRight 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.notification.hiding {
+    animation: slideOutRight 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+/* ===== ENHANCED LOADING ANIMATIONS ===== */
+@keyframes loadingHeartBeat {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+.loading-hearts i {
+    animation: loadingHeartBeat 1.5s ease-in-out infinite;
+}
+
+.loading-hearts i:nth-child(2) { animation-delay: 0.3s; }
+.loading-hearts i:nth-child(3) { animation-delay: 0.6s; }
